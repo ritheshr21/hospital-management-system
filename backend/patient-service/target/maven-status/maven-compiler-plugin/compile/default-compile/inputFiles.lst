@@ -1,0 +1,16 @@
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\controller\PatientController.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\dto\EmergencyContactDto.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\dto\MedicalRecordDto.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\dto\PatientRequest.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\dto\PatientResponse.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\entity\EmergencyContact.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\entity\Gender.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\entity\MedicalRecord.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\entity\Patient.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\exception\EmailAlreadyExistsException.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\exception\GlobalExceptionHandler.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\exception\PatientNotFoundException.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\mapper\PatientMapper.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\PatientServiceApplication.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\repository\PatientRepository.java
+C:\Hospital Management System\hospital-management-system\backend\patient-service\src\main\java\com\hms\patient_service\service\PatientService.java
