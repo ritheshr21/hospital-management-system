@@ -1,0 +1,17 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: triage-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka
+
+groq:
+  # Set GROQ_API_KEY in the environment. Free key (no card) at https://console.groq.com
+  api-key: ${GROQ_API_KEY:}
+  url: https://api.groq.com/openai/v1/chat/completions
+  model: llama-3.3-70b-versatile

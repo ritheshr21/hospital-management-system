@@ -1,64 +1,206 @@
-version: "3.8"
-
 services:
+
+  # ---------- infrastructure ----------
 
   postgres:
     image: postgres:16
     container_name: hms-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_DB: hms_auth_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 2131
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-2131}
     ports:
       - "5432:5432"
     volumes:
+      # Named volume so hospital data survives `docker compose down`.
+      - postgres_data:/var/lib/postgresql/data
       - ./backend/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: hms-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  kafka:
+    image: apache/kafka:3.9.0
+    container_name: hms-kafka
+    restart: unless-stopped
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+    volumes:
+      - kafka_data:/tmp/kraft-combined-logs
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  # ---------- platform ----------
 
   service-registry:
     build: ./backend/service-registry
     container_name: service-registry
+    restart: unless-stopped
     ports:
       - "8761:8761"
 
   api-gateway:
     build: ./backend/api-gateway
     container_name: api-gateway
+    restart: unless-stopped
     ports:
       - "8080:8080"
     depends_on:
       - service-registry
 
+  # ---------- business services ----------
+
   auth-service:
     build: ./backend/auth-service
     container_name: auth-service
+    restart: unless-stopped
     ports:
       - "8081:8081"
     depends_on:
-      - postgres
-      - service-registry
+      postgres:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
 
   patient-service:
     build: ./backend/patient-service
     container_name: patient-service
+    restart: unless-stopped
     ports:
       - "8082:8082"
     depends_on:
-      - postgres
-      - service-registry
+      postgres:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
 
   doctor-service:
     build: ./backend/doctor-service
     container_name: doctor-service
+    restart: unless-stopped
     ports:
       - "8083:8083"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
+
+  triage-service:
+    build: ./backend/triage-service
+    container_name: triage-service
+    restart: unless-stopped
+    ports:
+      - "8084:8084"
+    environment:
+      # Free key (no card) from https://console.groq.com — put it in .env
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+    depends_on:
       - service-registry
+
+  appointment-service:
+    build: ./backend/appointment-service
+    container_name: appointment-service
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
+
+  billing-service:
+    build: ./backend/billing-service
+    container_name: billing-service
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
+
+  notification-service:
+    build: ./backend/notification-service
+    container_name: notification-service
+    restart: unless-stopped
+    ports:
+      - "8087:8087"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
+
+  pharmacy-service:
+    build: ./backend/pharmacy-service
+    container_name: pharmacy-service
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      service-registry:
+        condition: service_started
+
+  # ---------- ui ----------
 
   frontend:
     build: ./frontend/hms-ui
     container_name: hms-frontend
+    restart: unless-stopped
     ports:
       - "5173:5173"
     depends_on:
       - api-gateway
+
+volumes:
+  postgres_data:
+  redis_data:
+  kafka_data:

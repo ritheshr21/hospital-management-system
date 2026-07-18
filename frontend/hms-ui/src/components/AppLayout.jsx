@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { unreadCount } from "../api/notifications";
 import "../styles/app.css";
+import "../styles/billing.css";
 
 /**
  * Shared page chrome (top bar + content area) for the authenticated app.
@@ -9,6 +12,12 @@ function AppLayout({ title, actions, children }) {
   const navigate = useNavigate();
   const role = localStorage.getItem("role");
   const name = localStorage.getItem("name");
+  const [unread, setUnread] = useState(0);
+
+  useEffect(() => {
+    // Best-effort: the bell shouldn't break a page if the service is down.
+    unreadCount().then(setUnread).catch(() => setUnread(0));
+  }, []);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -31,6 +40,10 @@ function AppLayout({ title, actions, children }) {
 
         <div className="app-navbar-actions">
           {actions}
+          <button className="bell" onClick={() => navigate("/notifications")} title="Notifications">
+            🔔
+            {unread > 0 && <span className="count">{unread}</span>}
+          </button>
           <button className="btn btn-ghost" onClick={() => navigate("/dashboard")}>
             Dashboard
           </button>

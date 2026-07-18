@@ -1,0 +1,45 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: billing-service
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/hms_billing_db
+    username: postgres
+    password: 2131
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: billing-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # Events are consumed as raw JSON strings and parsed per-listener, which
+      # avoids brittle cross-service type headers.
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka
+
+hms:
+  topics:
+    appointment-completed: appointment_completed
+    bill-paid: bill_paid
+  billing:
+    tax-percent: 5
+    insurance-coverage-percent: 80
+    default-consultation-fee: 500

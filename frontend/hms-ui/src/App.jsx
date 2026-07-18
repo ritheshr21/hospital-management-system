@@ -10,6 +10,15 @@ import DepartmentsPage from "./pages/departments/DepartmentsPage";
 import DoctorList from "./pages/doctors/DoctorList";
 import DoctorForm from "./pages/doctors/DoctorForm";
 import DoctorProfile from "./pages/doctors/DoctorProfile";
+import BookAppointment from "./pages/appointments/BookAppointment";
+import AppointmentsList from "./pages/appointments/AppointmentsList";
+import QueueBoard from "./pages/appointments/QueueBoard";
+import BillingList from "./pages/billing/BillingList";
+import InvoicePage from "./pages/billing/InvoicePage";
+import NotificationsPage from "./pages/notifications/NotificationsPage";
+import PharmacyDashboard from "./pages/pharmacy/PharmacyDashboard";
+import PrescriptionsList from "./pages/pharmacy/PrescriptionsList";
+import PrescriptionForm from "./pages/pharmacy/PrescriptionForm";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -100,6 +109,81 @@ function App() {
           element={
             <ProtectedRoute>
               <DoctorForm />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/appointments"
+          element={
+            <ProtectedRoute>
+              <AppointmentsList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/appointments/book"
+          element={
+            <ProtectedRoute>
+              <BookAppointment />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/queue"
+          element={
+            <ProtectedRoute>
+              <QueueBoard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/bills"
+          element={
+            <ProtectedRoute>
+              <BillingList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/bills/:id"
+          element={
+            <ProtectedRoute>
+              <InvoicePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <NotificationsPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/pharmacy"
+          element={
+            <ProtectedRoute>
+              <PharmacyDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/prescriptions"
+          element={
+            <ProtectedRoute>
+              <PrescriptionsList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/prescriptions/new"
+          element={
+            <ProtectedRoute>
+              <PrescriptionForm />
             </ProtectedRoute>
           }
         />
