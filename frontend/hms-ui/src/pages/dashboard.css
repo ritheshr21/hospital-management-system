@@ -1,0 +1,65 @@
+.dashboard-container {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.dashboard-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.dashboard-navbar h1 {
+  font-size: 24px;
+  color: #1e293b;
+}
+
+.role-badge {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.dashboard-navbar button {
+  padding: 10px 18px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  padding: 40px;
+}
+
+.welcome-text {
+  margin-bottom: 30px;
+  color: #334155;
+}
+
+.dashboard-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.action-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e293b;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transition: 0.2s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+}

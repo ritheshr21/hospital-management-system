@@ -1,0 +1,104 @@
+/* Search bar */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.toolbar input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid var(--hms-border);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Table */
+.table-wrap {
+  overflow-x: auto;
+}
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--hms-card);
+  border: 1px solid var(--hms-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.patient-table th,
+.patient-table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--hms-border);
+  font-size: 14px;
+  white-space: nowrap;
+}
+.patient-table th {
+  background: #f1f5f9;
+  color: var(--hms-muted);
+  font-weight: 600;
+}
+.patient-table tr:last-child td { border-bottom: none; }
+.patient-table tbody tr:hover { background: #f8fafc; }
+.row-actions { display: flex; gap: 8px; }
+
+/* Forms */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label { font-size: 13px; color: var(--hms-muted); font-weight: 500; }
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--hms-border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.form-section-title {
+  grid-column: 1 / -1;
+  margin: 12px 0 0;
+  font-size: 15px;
+  color: var(--hms-text);
+  font-weight: 600;
+}
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Medical history editable rows */
+.history-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 10px;
+}
+
+/* Profile view */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.profile-item .label { font-size: 12px; color: var(--hms-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+.profile-item .value { font-size: 16px; margin-top: 2px; }
+.profile-section { margin-top: 28px; }
+.history-card {
+  border: 1px solid var(--hms-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.history-card .cond { font-weight: 600; }
+.history-card .notes { color: var(--hms-muted); font-size: 14px; margin-top: 4px; }
+
+@media (max-width: 640px) {
+  .form-grid, .profile-grid { grid-template-columns: 1fr; }
+}

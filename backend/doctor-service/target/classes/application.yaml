@@ -1,0 +1,21 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: doctor-service
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/hms_doctor_db
+    username: postgres
+    password: 2131
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka

@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: hms-postgres
+    environment:
+      POSTGRES_DB: hms_auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2131
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backend/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  service-registry:
+    build: ./backend/service-registry
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+
+  api-gateway:
+    build: ./backend/api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-registry
+
+  auth-service:
+    build: ./backend/auth-service
+    container_name: auth-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+      - service-registry
+
+  patient-service:
+    build: ./backend/patient-service
+    container_name: patient-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres
+      - service-registry
+
+  doctor-service:
+    build: ./backend/doctor-service
+    container_name: doctor-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - postgres
+      - service-registry
+
+  frontend:
+    build: ./frontend/hms-ui
+    container_name: hms-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api-gateway
