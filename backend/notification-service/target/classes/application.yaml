@@ -1,0 +1,40 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: notification-service
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/hms_notification_db
+    username: postgres
+    password: 2131
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: notification-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka
+
+hms:
+  topics:
+    appointment-completed: appointment_completed
+    bill-paid: bill_paid
+    stock-low: stock_low
+  notifications:
+    email:
+      # Turn on and set spring.mail.* (e.g. Gmail SMTP + app password) to send real email.
+      enabled: false
+      from: no-reply@hms.local

@@ -1,0 +1,9 @@
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\controller\NotificationController.java
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\dto\NotificationResponse.java
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\email\EmailNotifier.java
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\entity\Notification.java
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\entity\NotificationType.java
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\event\EventConsumer.java
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\NotificationServiceApplication.java
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\repository\NotificationRepository.java
+C:\Hospital Management System\hospital-management-system\backend\notification-service\src\main\java\com\hms\notification_service\service\NotificationService.java

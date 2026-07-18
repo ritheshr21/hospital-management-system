@@ -8,25 +8,28 @@ const dashboardOptions = {
     { label: "Manage Patients", to: "/patients" },
     { label: "Manage Doctors", to: "/doctors" },
     { label: "Manage Departments", to: "/departments" },
-    { label: "View Reports", to: null }
+    { label: "Billing & Invoices", to: "/bills" },
+    { label: "Pharmacy & Inventory", to: "/pharmacy" },
+    { label: "Notifications", to: "/notifications" }
   ],
   DOCTOR: [
-    { label: "View Appointments", to: null },
+    { label: "View Appointments", to: "/appointments" },
     { label: "Manage Availability", to: "/doctors" },
-    { label: "Write Prescriptions", to: null },
+    { label: "Write Prescriptions", to: "/prescriptions/new" },
     { label: "View Patient History", to: "/patients" }
   ],
   PATIENT: [
-    { label: "Book Appointment", to: null },
-    { label: "View Medical History", to: null },
-    { label: "View Prescriptions", to: null },
-    { label: "Pay Bills", to: null }
+    { label: "Book Appointment", to: "/appointments/book" },
+    { label: "Live Queue", to: "/queue" },
+    { label: "Pay Bills", to: "/bills" },
+    { label: "View Prescriptions", to: "/prescriptions" }
   ],
   RECEPTIONIST: [
     { label: "Register Walk-in Patients", to: "/patients" },
-    { label: "Manage Queue", to: null },
-    { label: "Book Appointments", to: null },
-    { label: "Billing Support", to: null }
+    { label: "Manage Queue", to: "/queue" },
+    { label: "Book Appointments", to: "/appointments/book" },
+    { label: "Billing Support", to: "/bills" },
+    { label: "Pharmacy", to: "/pharmacy" }
   ]
 };
 

@@ -1,0 +1,81 @@
+/* Urgency badges (1 routine .. 5 critical) */
+.urgency {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.urgency-5 { background: #fee2e2; color: #b91c1c; }
+.urgency-4 { background: #ffedd5; color: #c2410c; }
+.urgency-3 { background: #fef9c3; color: #a16207; }
+.urgency-2 { background: #dbeafe; color: #1e40af; }
+.urgency-1 { background: #f1f5f9; color: #475569; }
+
+.status-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.status-BOOKED { background: #dbeafe; color: #1e40af; }
+.status-CANCELLED { background: #fee2e2; color: #991b1b; }
+.status-COMPLETED { background: #dcfce7; color: #166534; }
+
+/* Triage result card */
+.triage-card {
+  border: 1px solid var(--hms-border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  background: #f8fafc;
+}
+.triage-card .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.triage-card .dept { font-weight: 700; font-size: 16px; }
+.triage-card .reason { color: var(--hms-muted); font-size: 14px; margin-top: 8px; }
+.triage-card .action { margin-top: 6px; font-size: 14px; }
+
+/* Token confirmation */
+.token-box {
+  text-align: center;
+  padding: 30px;
+  border: 2px dashed var(--hms-primary);
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+.token-box .num { font-size: 48px; font-weight: 800; color: var(--hms-primary); line-height: 1; }
+.token-box .lbl { color: var(--hms-muted); text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+
+/* Queue board */
+.queue-board { display: flex; flex-direction: column; gap: 10px; }
+.queue-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--hms-card);
+  border: 1px solid var(--hms-border);
+  border-left: 5px solid var(--hms-primary);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.queue-item.crit { border-left-color: #dc2626; }
+.queue-pos {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #eef2ff; color: var(--hms-primary);
+  font-weight: 700;
+}
+.queue-main { flex: 1; }
+.queue-main .name { font-weight: 600; }
+.queue-main .sub { color: var(--hms-muted); font-size: 13px; margin-top: 2px; }
+.queue-token { font-size: 13px; color: var(--hms-muted); }
+
+.live-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e; margin-right: 6px;
+  animation: pulse 1.4s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }

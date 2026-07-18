@@ -1,0 +1,10 @@
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\client\GroqClient.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\config\AppConfig.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\config\GroqProperties.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\controller\TriageController.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\dto\TriageRequest.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\dto\TriageResponse.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\exception\GlobalExceptionHandler.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\exception\TriageException.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\service\TriageService.java
+C:\Hospital Management System\hospital-management-system\backend\triage-service\src\main\java\com\hms\triage_service\TriageServiceApplication.java
